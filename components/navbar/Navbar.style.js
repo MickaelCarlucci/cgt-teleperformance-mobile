@@ -2,11 +2,14 @@ import { StyleSheet } from "react-native";
 
 const s = StyleSheet.create({
   navView: {
+    marginTop: 30,
+    height: 60, // Hauteur de la barre
+    backgroundColor: "#fff",
+    borderBottomWidth: 1,
+    borderBottomColor: "#d30013",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#f8f8f8",
-    padding: 10,
   },
 
   navButton: {
@@ -16,7 +19,7 @@ const s = StyleSheet.create({
 
   activeNavButton: {
     borderBottomWidth: 2,
-    borderBottomColor: "#000",
+    borderBottomColor: "#d30013",
   },
 });
 

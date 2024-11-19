@@ -6,7 +6,6 @@ export function Navbar() {
   const [activeTab, setActiveTab] = useState("Accueil");
 
   const isActive = (tabName) => activeTab === tabName;
-  console.log("Navbar is rendering");
 
   return (
     <View style={s.navView}>
