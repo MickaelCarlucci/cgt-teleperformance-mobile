@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
+import { useState } from "react";
 import {s} from "./Contact.style"
 
 
