@@ -1,50 +1,61 @@
 import { View, TouchableOpacity, Text } from "react-native";
-import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { s } from "./Navbar.style";
 
 export function Navbar() {
-  const [activeTab, setActiveTab] = useState("Accueil");
   const navigation = useNavigation(); // Hook pour naviguer
+  const route = useRoute(); // Récupère la route actuelle
 
-  const isActive = (tabName) => activeTab === tabName;
+  // Fonction pour déterminer si un onglet est actif en fonction de la route
+  const isActive = (routeName) => route.name === routeName;
 
-  const handlePress = (tabName, route) => {
-    setActiveTab(tabName); // Met à jour l'onglet actif
-    navigation.navigate(route); // Navigue vers la route correspondante
+  const handlePress = (routeName) => {
+    if (!isActive(routeName)) {
+      navigation.navigate(routeName); // Navigue uniquement si ce n'est pas déjà actif
+    }
   };
 
   return (
     <View style={s.navView}>
       <TouchableOpacity
-        style={[s.navButton, isActive("Accueil") ? s.activeNavButton : null]}
-        onPress={() => handlePress("Accueil", "Home")}
+        style={[s.navButton, isActive("Home") ? s.activeNavButton : null]}
+        onPress={() => handlePress("Home")}
       >
-        <Text>Accueil</Text>
+        <Text style={isActive("Home") ? s.activeText : s.inactiveText}>
+          Accueil
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={[s.navButton, isActive("Actualités") ? s.activeNavButton : null]}
-        onPress={() => handlePress("Actualités", "News")}
+        style={[s.navButton, isActive("News") ? s.activeNavButton : null]}
+        onPress={() => handlePress("News")}
       >
-        <Text>Actualités</Text>
+        <Text style={isActive("News") ? s.activeText : s.inactiveText}>
+          Actualités
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={[s.navButton, isActive("Sondages") ? s.activeNavButton : null]}
-        onPress={() => handlePress("Sondages", "Polls")}
+        style={[s.navButton, isActive("Polls") ? s.activeNavButton : null]}
+        onPress={() => handlePress("Polls")}
       >
-        <Text>Sondages</Text>
+        <Text style={isActive("Polls") ? s.activeText : s.inactiveText}>
+          Sondages
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[s.navButton, isActive("Documents") ? s.activeNavButton : null]}
-        onPress={() => handlePress("Documents", "Documents")}
+        onPress={() => handlePress("Documents")}
       >
-        <Text>Documents</Text>
+        <Text style={isActive("Documents") ? s.activeText : s.inactiveText}>
+          Documents
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[s.navButton, isActive("Contact") ? s.activeNavButton : null]}
-        onPress={() => handlePress("Contact", "Contact")}
+        onPress={() => handlePress("Contact")}
       >
-        <Text>Contact</Text>
+        <Text style={isActive("Contact") ? s.activeText : s.inactiveText}>
+          Contact
+        </Text>
       </TouchableOpacity>
     </View>
   );
