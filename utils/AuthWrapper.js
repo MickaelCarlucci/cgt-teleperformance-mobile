@@ -11,6 +11,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { API_URL } from "@env";
 import Loader from "../components/Loader/Loader";
 import News from "../pages/News/News";
+import Polls from "../pages/Polls/Polls";
+import Documents from "../pages/Documents/Documents";
 
 const Stack = createStackNavigator();
 
@@ -60,42 +62,28 @@ function AuthWrapper() {
     initializeAuth();
   }, [dispatch]);
 
+  const withMainLayout = (Component) => () => (
+    <MainLayout>
+      <Component />
+    </MainLayout>
+  );
+
   if (loading) return <Loader />;
 
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      {!user ? (
-        <Stack.Screen name="Signin" component={Signin} />
-      ) : (
-        <>
-          <Stack.Screen name="Home">
-            {() => (
-              <MainLayout>
-                <Home />
-              </MainLayout>
-            )}
-          </Stack.Screen>
-          <Stack.Screen name="News">
-            {() => (
-              <MainLayout>
-                <News />
-              </MainLayout>
-            )}
-          </Stack.Screen>
-          <Stack.Screen name="Contact">
-            {() => (
-              <MainLayout>
-                <Contact />
-              </MainLayout>
-            )}
-          </Stack.Screen>
-        </>
-      )}
-    </Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    {!user ? (
+      <Stack.Screen name="Signin" component={Signin} />
+    ) : (
+      <>
+        <Stack.Screen name="Home" component={withMainLayout(Home)} />
+        <Stack.Screen name="News" component={withMainLayout(News)} />
+        <Stack.Screen name="Polls" component={withMainLayout(Polls)} />
+        <Stack.Screen name="Documents" component={withMainLayout(Documents)} />
+        <Stack.Screen name="Contact" component={withMainLayout(Contact)} />
+      </>
+    )}
+  </Stack.Navigator>
   );
 }
 
