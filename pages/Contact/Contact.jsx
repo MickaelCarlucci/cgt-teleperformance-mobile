@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useSelector } from "react-redux";
-import { fetchWithToken } from "../../utils/fetchWithToken"; // Adaptez cette méthode pour React Native
+import { fetchWithToken } from "../../utils/fetchWithToken"; 
 import { API_URL } from "@env";
 import {s} from "./Contact.style"
-import Loader from "../../components/Loader/Loader" // Adaptez votre composant Loader pour React Native
+import Loader from "../../components/Loader/Loader" 
 
-export default function Page() {
+export default function Contact() {
   const { user, loading } = useSelector((state) => state.auth);
   const [centers, setCenters] = useState([]);
   const [filteredElected, setFilteredElected] = useState([]);

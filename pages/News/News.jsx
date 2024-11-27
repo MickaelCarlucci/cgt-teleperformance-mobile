@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import { API_URL } from "@env";
 import { useSelector } from "react-redux";
-import { fetchWithToken } from "../../utils/fetchWithToken"; // Adaptez cette méthode pour React Native
+import { fetchWithToken } from "../../utils/fetchWithToken"; 
 import { s } from "./News.style"
-import Loader from "../../components/Loader/Loader"; // Adaptez votre composant Loader pour React Native
+import Loader from "../../components/Loader/Loader"; 
 
 // Fonction pour convertir le contenu Draft.js brut en HTML (React Native affiche le texte brut ici)
 const convertRawContentToText = (rawContent) => {

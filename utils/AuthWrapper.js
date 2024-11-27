@@ -10,6 +10,7 @@ import { firebaseAuth } from "./firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { API_URL } from "@env";
 import Loader from "../components/Loader/Loader";
+import News from "../pages/News/News";
 
 const Stack = createStackNavigator();
 
@@ -75,6 +76,13 @@ function AuthWrapper() {
             {() => (
               <MainLayout>
                 <Home />
+              </MainLayout>
+            )}
+          </Stack.Screen>
+          <Stack.Screen name="News">
+            {() => (
+              <MainLayout>
+                <News />
               </MainLayout>
             )}
           </Stack.Screen>
