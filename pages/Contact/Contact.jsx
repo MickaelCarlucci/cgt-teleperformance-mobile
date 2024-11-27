@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import { fetchWithToken } from "../../utils/fetchWithToken"; // Adaptez cette méthode pour React Native
-import { useNavigation } from "@react-navigation/native";
 import { API_URL } from "@env";
 import {s} from "./Contact.style"
 import Loader from "../../components/Loader/Loader" // Adaptez votre composant Loader pour React Native
 
 export default function Page() {
-  const navigation = useNavigation();
   const { user, loading } = useSelector((state) => state.auth);
   const [centers, setCenters] = useState([]);
   const [filteredElected, setFilteredElected] = useState([]);
@@ -80,22 +78,21 @@ export default function Page() {
   if (loading) return <Loader />;
 
   return (
-    <View style={styles.container}>
-      {hasAccess ? (
+    <View style={s.container}>
         <>
-          <Text style={styles.title}>Liste des élus CGT</Text>
-          <TouchableOpacity style={styles.button} onPress={resetFilters}>
-            <Text style={styles.buttonText}>Tous vos élu(e)s</Text>
+          <Text style={s.title}>Liste des élus CGT</Text>
+          <TouchableOpacity style={s.button} onPress={resetFilters}>
+            <Text style={s.buttonText}>Tous vos élu(e)s</Text>
           </TouchableOpacity>
-          {error ? <Text style={styles.error}>{error}</Text> : null}
-          <Text style={styles.subtitle}>Filtres:</Text>
-          <View style={styles.filters}>
+          {error ? <Text style={s.error}>{error}</Text> : null}
+          <Text style={s.subtitle}>Filtres:</Text>
+          <View style={s.filters}>
             <FlatList
               data={centers.filter((center) => center.id !== 14 && center.id !== 15)}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  style={styles.filterButton}
+                  style={s.filterButton}
                   onPress={() => listElectedByCenter(item.id)}
                 >
                   <Text>{item.name}</Text>
@@ -107,7 +104,7 @@ export default function Page() {
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  style={styles.filterButton}
+                  style={s.filterButton}
                   onPress={() => listElectedByRole(item.id)}
                 >
                   <Text>{item.name}</Text>
@@ -119,8 +116,8 @@ export default function Page() {
             data={filteredElected}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <View style={styles.electedCard}>
-                <Text style={styles.electedName}>
+              <View style={s.electedCard}>
+                <Text style={s.electedName}>
                   {item.lastname} {item.firstname}
                 </Text>
                 {item.phone && (
@@ -133,17 +130,7 @@ export default function Page() {
             )}
           />
         </>
-      ) : (
-        <Text style={styles.accessDenied}>
-          Vous devez vous inscrire pour avoir accès à la liste des élus, cliquez{" "}
-          <Text
-            style={styles.link}
-            onPress={() => navigation.navigate("Signup")}
-          >
-            ici
-          </Text>
-        </Text>
-      )}
+
     </View>
   );
 }
