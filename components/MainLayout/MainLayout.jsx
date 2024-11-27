@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Animated, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import {Navbar} from "../Navbar/Navbar"
+import {Navbar} from "../navbar/Navbar"
 import { s } from "../../App.style";
 
 export const MainLayout = ({ children }) => {
